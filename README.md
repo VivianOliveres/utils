@@ -6,17 +6,18 @@ Usefull informations about installation and configuration of ubuntu
 ## Softwares
 
 * sdkman (http://sdkman.io/)
-Usefull to manage installation of java/maven/scala/groovy/...
-```sh
-curl -s "https://get.sdkman.io" | bash
-```
+Usefull to manage installation of sdks based on jvm (java, maven, scala, groovy, ...)
 * SublimeText (https://www.sublimetext.com/)
-Excellent text editor
+Text editor
 * IntelliJ (https://www.jetbrains.com/idea/)
 IDE
+* Git (https://git-scm.com/download/linux)
+Latest version with updates
+```bash
+sudo add-apt-repository ppa:git-core/ppa
+sudo apt-get update
+sudo apt-get install git
+```
 
 ## Configuration
-* Application lauchers are
-``` 
-/.local/share/applications
-```
+* Application lauchers are stored *.local/share/applications*
