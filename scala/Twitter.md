@@ -343,7 +343,7 @@ numbers.map((i: Int) => i * 2)
 
 + foreach
 
-++ Returns nothing and is intended to side-effects
+..+ Returns nothing and is intended to side-effects
 
 ```scala
 numbers.foreach((i: Int) => i * 2)
@@ -357,7 +357,7 @@ numbers.filter((i: Int) => i % 2 == 0)
 
 + zip
 
-++ aggregates the contents of two lists into a single list of pairs.
+..+ aggregates the contents of two lists into a single list of pairs.
 
 ```scala
 	List(1, 2, 3).zip(List("a", "b", "c"))
@@ -366,7 +366,7 @@ numbers.filter((i: Int) => i % 2 == 0)
 
 + partition
 
-++ splits a list based on a predicate
+..+ splits a list based on a predicate
 
 ```scala
 	val numbers = List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
@@ -376,7 +376,7 @@ numbers.filter((i: Int) => i % 2 == 0)
 
 + find
 
-++ returns the first element of a collection that matches a predicate function
+..+ returns the first element of a collection that matches a predicate function
 
 ```scala
 numbers.find((i: Int) => i > 5)
@@ -385,14 +385,14 @@ numbers.find((i: Int) => i > 5)
 
 + drop & dropWhile
 
-++ drop drops the first i elements
+..+ drop drops the first i elements
 
 ```scala
 numbers.drop(5)
 // res0: List[Int] = List(6, 7, 8, 9, 10)
 ```
 
-++ dropWhile removes the first elements that match a predicate function
+..+ dropWhile removes the first elements that match a predicate function
 
 ```scala
 numbers.dropWhile(_ % 2 != 0)
@@ -401,7 +401,7 @@ numbers.dropWhile(_ % 2 != 0)
 
 + foldLeft & foldRight
 
-++ Zero is starting value and m is an accumulator
+..+ Zero is starting value and m is an accumulator
 
 ```scala
 numbers.foldLeft(0)((m: Int, n: Int) => m + n)
@@ -410,7 +410,7 @@ numbers.foldLeft(0)((m: Int, n: Int) => m + n)
 
 + flatten
 
-++ collapses one level of nested structure
+..+ collapses one level of nested structure
 
 ```scala
 List(List(1, 2), List(3, 4)).flatten
@@ -419,7 +419,7 @@ List(List(1, 2), List(3, 4)).flatten
 
 + flatMap
 
-++ Mapping & Flatening
+..+ Mapping & Flatening
 
 ```scala
 val nestedNumbers = List(List(1, 2), List(3, 4))
@@ -429,7 +429,7 @@ nestedNumbers.flatMap(x => x.map(_ * 2))
 
 + Generalized functional combinators
 
-++ Everything can be done with foldXXX methods. Exemple with map:
+..+ Everything can be done with foldXXX methods. Exemple with map:
 
 ```scala
 def ourMap(numbers: List[Int], fn: Int => Int): List[Int] = {
@@ -451,7 +451,7 @@ extensions.filter({case (name, extension) => extension < 200})
 
 + Function Composition
 
-++ compose
+..+ compose
 
 ```scala
 scala> def f(s: String) = "f(" + s + ")"
@@ -460,7 +460,7 @@ scala> val fComposeG = f _ compose g _
 	fComposeG: (String) => java.lang.String = <function>
 ```
 
-++ andThen
+..+ andThen
 
 ```scala
 scala> val fAndThenG = f _ andThen g _
@@ -469,7 +469,7 @@ fAndThenG: (String) => java.lang.String = <function>
 
 + PartialFunction
 
-++ Functions defined for some values
+..+ Functions defined for some values
 
 ```scala	
 scala> val one: PartialFunction[Int, String] = { case 1 => "one" }
@@ -482,7 +482,7 @@ scala> one.isDefinedAt(2)
 	res1: Boolean = false
 ```
 
-++ Can be composed
+..+ Can be composed
 
 ```scala
 scala> val two: PartialFunction[Int, String] = { case 2 => "two" }
