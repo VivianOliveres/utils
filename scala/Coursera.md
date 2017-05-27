@@ -6,7 +6,7 @@ def square(x: Double) = x * x
 def square(x: Int) = x * x
 
 def value: Int = 123
-```scala
+```
 
 ## By name
 ```scala
