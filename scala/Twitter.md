@@ -144,7 +144,6 @@ val newFoo = FooMaker()
 ```scala
 object Timer {
 	var count = 0
-
 	def currentCount(): Long = {
 		count += 1
 		count
@@ -228,7 +227,7 @@ def calcType(calc: Calculator) = calc match {
 	hp20b == hp20B
 ```
 
-+ _hashcode_, _equals_ and _toString_ are defined by default
++ `hashcode`, `equals` and `toString` are defined by default
 
 ## Case Classes with pattern matching
 
