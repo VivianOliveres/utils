@@ -16,8 +16,8 @@ def and(x: Boolean, y: => Boolean) = if (x) y else false // With "by name" then 
 ```
 
 ## Recusrion
-Tail recursion: iterative process
-Tail-calls: recursive call
++ Tail recursion: iterative process
++ Tail-calls: recursive call
 
 ```scala
 @tailrec
@@ -44,8 +44,8 @@ def sum(f: Int => Int)(a: Int, b: Int): Int =
 Int, Double, Byte, Short, Char, Long, Float
 
 ## Call by value/name
-call-by-value (x: Int)
-call-by-name (y: => Double)
++ call-by-value (x: Int)
++ call-by-name (y: => Double)
 
 ## Infix notation
 ```scala
@@ -139,7 +139,7 @@ Patterns are constructors, variables, wildcard, constants
 ```scala
 val r: Range = 1 until 5		// 1, 2, 3, 4
 val r: Range = 1 to 5 			// 1, 2, 3, 4, 5
-1 to 10 by 3					// 1, 4, 7, 10
+1 to 10 by 3				// 1, 4, 7, 10
 ```
 
 ## For-expression
