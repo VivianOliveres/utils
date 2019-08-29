@@ -2,6 +2,8 @@
 http://ohmyz.sh/
 
 ## Git shortcuts
+https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/git/
+
 | Command                    | Shortcut |
 | -------------------------- | -------- |
 | git add --all              | **gaa**      |
