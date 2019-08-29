@@ -1,0 +1,10 @@
+<component name="ProjectCodeStyleConfiguration">
+  <code_scheme name="Project" version="173">
+    <XML>
+      <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />
+    </XML>
+    <codeStyleSettings language="Scala">
+      <option name="METHOD_CALL_CHAIN_WRAP" value="1" />
+    </codeStyleSettings>
+  </code_scheme>
+</component>
