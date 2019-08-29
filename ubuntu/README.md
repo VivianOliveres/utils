@@ -21,6 +21,8 @@ sudo apt-get update
 sudo apt-get install git
 ```
 * HTTPie (https://httpie.org/)
+
+**cheatsheet**: https://devhints.io/httpie
 ```bash
 sudo apt-get install httpie
 ```
