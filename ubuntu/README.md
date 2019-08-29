@@ -20,6 +20,10 @@ sudo add-apt-repository ppa:git-core/ppa
 sudo apt-get update
 sudo apt-get install git
 ```
+* HTTPie (https://httpie.org/)
+```bash
+sudo apt-get install httpie
+```
 * VLC (http://www.videolan.org/)
 ```bash
 sudo apt-get install vlc
