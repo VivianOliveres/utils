@@ -1,0 +1,22 @@
+# kubectl create cronjob dice --image kodekloud/throw-dice --schedule "1 * * * *" --dry-run=client -o yaml > cron.yaml
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: dice
+spec:
+  jobTemplate:
+    metadata:
+      name: dice
+    spec:
+      parallelism: 1
+      completions: 1
+      backoffLimit: 25
+      activeDeadlineSeconds: 20
+      template:
+        spec:
+          containers:
+            - image: kodekloud/throw-dice
+              name: dice
+          restartPolicy: OnFailure
+  schedule: 1 * * * *
+  concurrencyPolicy: "Forbid"

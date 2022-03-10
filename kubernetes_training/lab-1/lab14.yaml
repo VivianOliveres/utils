@@ -1,0 +1,29 @@
+# kubectl create deployment nginx-deploy --image=nginx:1.16 --replicas=4 --dry-run=client -o yaml > deploy.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx-deploy
+  name: nginx-deploy
+spec:
+  replicas: 4
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 2
+  selector:
+    matchLabels:
+      app: nginx-deploy
+  template:
+    metadata:
+      labels:
+        app: nginx-deploy
+    spec:
+      containers:
+        - image: nginx:1.16
+          name: nginx
+---
+# kubectl set image deployment/nginx-deploy nginx=nginx:1.17
+# kubectl rollout history deployment/nginx-deploy
+# kubectl rollout undo deployment nginx-deploy --to-revision=1

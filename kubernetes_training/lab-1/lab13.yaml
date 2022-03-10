@@ -1,0 +1,27 @@
+# kubectl create ns dvl1987
+# kubectl create cm time-config --from-literal=TIME_FREQ=10 -n=dvl1987
+# kubectl run time-check  --image=busybox -n=dvl1987 --dry-run=client -o yaml > pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: time-check
+  name: time-check
+  namespace: dvl1987
+spec:
+  containers:
+    - image: busybox
+      name: time-check
+      command: ["/bin/sh", "-c", "while true; do date; sleep $TIME_FREQ;done > /opt/time/time-check.log"]
+      env:
+        - name: TIME_FREQ
+          valueFrom:
+            configMapKeyRef:
+              name: time-config
+              key: TIME_FREQ
+      volumeMounts:
+        - mountPath: /opt/time
+          name: data-volume
+  volumes:
+    - name: data-volume
+      emptyDir: {}
