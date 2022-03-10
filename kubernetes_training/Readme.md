@@ -37,13 +37,13 @@ Yaml example:
 apiVersion: v1
 kind: Pod
 metadata:
-	name: my-app-pod
-	labels:
-		app: my-app
+  name: my-app-pod
+  labels:
+    app: my-app
 spec:
-	containers:
-		- name: nginx-container
-		  image: nginx
+  containers:
+    - name: nginx-container
+      image: nginx
 ```
 
 Command examples:
@@ -111,17 +111,17 @@ Yaml example:
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
-	name: my-app-rs
-	labels:
-		app: myapp
-		type: front-end
+  name: my-app-rs
+  labels:
+    app: myapp
+    type: front-end
 spec:
-	template:
-		<pod metadata+spec>
-	replicas: 3
-	selector:
-		matchLabels:
-			type: front-end
+  template:
+    <pod metadata+spec>
+  replicas: 3
+  selector:
+    matchLabels:
+      type: front-end
 ```
 
 Command examples:
@@ -183,7 +183,7 @@ Yaml examples:
 apiVersion: v1
 kind: Namespace
 metadata:
-	name: dev
+  name: dev
 ```
 
 Resources can be limited into namespace by using [quotas](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#resourcequota-v1-core)
@@ -191,15 +191,15 @@ Resources can be limited into namespace by using [quotas](https://kubernetes.io/
 apiVersion: v1
 kind: ResourceQuota
 metadata:
-	name: compute-quota
-	namespace: dev
+  name: compute-quota
+  namespace: dev
 spec:
-	hard:
-		pods: "10"
-		requests.cpu: "4"
-		requests.memory: 5Gi
-		limits.cpu: "10"
-		limitis.memory: 10Gi
+  hard:
+    pods: "10"
+    requests.cpu: "4"
+    requests.memory: 5Gi
+    limits.cpu: "10"
+    limitis.memory: 10Gi
 ```
 
 Commands example:
@@ -308,13 +308,13 @@ Commands and Arguments in Kubernetes
 apiVersion: v1
 kind: Pod
 metadata:
-	name: ubuntu-sleeper-pod
+  name: ubuntu-sleeper-pod
 spec:
-	containers:
-		- name: ubuntu-sleeper
-		  image: ubuntu-sleeper
-		  command: ["sleep"]
-		  args: ["10"]
+  containers:
+    - name: ubuntu-sleeper
+      image: ubuntu-sleeper
+      command: ["sleep"]
+      args: ["10"]
 ```
 
 Editing pods
@@ -353,35 +353,35 @@ docker run -e APP_COLOR=pink simple-webapp-color
 Simple definition
 ```yaml
 env:
-	- name: APP_COLOR
-	  value: pink
+  - name: APP_COLOR
+    value: pink
 ```
 
 From a ConfigMap definition
 ```yaml
 env:
-	- name: APP_COLOR
-	  valueFrom: 
-	  	configMapKeyRef:
-	  		name: <config-file>
+  - name: APP_COLOR
+    valueFrom: 
+      configMapKeyRef:
+        name: <config-file>
 ```
 
 From a ConfigMap definition in a volume
 ```yaml
 volumes:
-	- name: <volume-name>
-		configMap:
-			name: <config-file>
+  - name: <volume-name>
+    configMap:
+      name: <config-file>
 ```
 
 Only one value from a ConfigMap definition
 ```yaml
 env:
-	- name: APP_COLOR
-	  valueFrom: 
-	  	configMapKeyRef:
-	  		name: <config-file>
-	  		key: APP_COLOR
+  - name: APP_COLOR
+    valueFrom: 
+      configMapKeyRef:
+        name: <config-file>
+        key: APP_COLOR
 ```
 
 From secret
@@ -417,10 +417,10 @@ kubectl describe configmaps
 apiVersion: v1
 kind: ConfigMap
 metadata:
-	name: app-config
+  name: app-config
 data:
-	APP_COLOR: blue
-	APP_MODE: prod
+  APP_COLOR: blue
+  APP_MODE: prod
 ```
 
 Pod with environment variables:
@@ -428,18 +428,18 @@ Pod with environment variables:
 apiVersion: v1
 kind: Pod
 metadata:
-	name: simple-webapp-color
-	labels:
-		name: simple-webapp-color
+  name: simple-webapp-color
+  labels:
+    name: simple-webapp-color
 spec:
-	containers:
-	 - name: simple-webapp-color
-	   image: simple-webapp-color
-	   ports:
-	   	- containerPort: 8080
-	   envFrom:
-	   	- configMapRef:
-	   		name: app-config
+  containers:
+   - name: simple-webapp-color
+     image: simple-webapp-color
+     ports:
+       - containerPort: 8080
+     envFrom:
+       - configMapRef:
+         name: app-config
 ```
 
 Secrets
@@ -469,45 +469,45 @@ kubectl get secret app-secret -o yaml
 apiVersion: v1
 kind: Secret
 metadata:
-	name: app-secret
+  name: app-secret
 data:
-	DB_HOST: bXlzcWw=
-	DB_USER: cm9vdA==
-	DB_PASSWORD: cDFzd3Jk
+  DB_HOST: bXlzcWw=
+  DB_USER: cm9vdA==
+  DB_PASSWORD: cDFzd3Jk
 ```
 
 ```yaml
 envFrom:
-	- secretRef:
-		name: app-secret
+  - secretRef:
+    name: app-secret
 ```
 
 ```yaml
 env:
-	- name: DB_PASSWORD
-		valueFrom:
-			secretKeyRef:
-				name: app-secret
-				key: DB_PASSWORD
+  - name: DB_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: app-secret
+        key: DB_PASSWORD
 ```
 
 Inject secrets as a volume (each value will create a dedicated file)
 ```yaml
 volumes:
-	- name: app-secret-volume
-		secret:
-			secretName: app-secret
+  - name: app-secret-volume
+    secret:
+      secretName: app-secret
 ```
 
 ```yaml
 apiVersion: v1
 kind: Secret
 metadata:
-	name: app-secret
+  name: app-secret
 data:
-	DB_HOST: bXlzcWw=
-	DB_USER: cm9vdA==
-	DB_PASSWORD: cDFzd3Jk
+  DB_HOST: bXlzcWw=
+  DB_USER: cm9vdA==
+  DB_PASSWORD: cDFzd3Jk
 ```
 
 
@@ -516,32 +516,32 @@ Secrets into a pod
 apiVersion: v1
 kind: Pod
 metadata:
-	name: simple-webapp-color
-	labels:
-		name: simple-webapp-color
+  name: simple-webapp-color
+  labels:
+    name: simple-webapp-color
 spec:
-	containers:
-	 - name: simple-webapp-color
-	   image: simple-webapp-color
-	   ports:
-	   	- containerPort: 8080
-	   envFrom:
-	   - secretRef:
-	   		name: app-secret
+  containers:
+   - name: simple-webapp-color
+     image: simple-webapp-color
+     ports:
+       - containerPort: 8080
+     envFrom:
+     - secretRef:
+         name: app-secret
 ```
 ```yaml
 apiVersion: v1
 kind: Pod
 metadata:
-	name: simple-webapp-color
-	labels:
-		name: simple-webapp-color
+  name: simple-webapp-color
+  labels:
+    name: simple-webapp-color
 spec:
-	containers:
-	 - name: simple-webapp-color
-	   image: simple-webapp-color
-	   ports:
-	   	- containerPort: 8080
+  containers:
+   - name: simple-webapp-color
+     image: simple-webapp-color
+     ports:
+       - containerPort: 8080
        env:
          - name: DB_HOST
            valueFrom:
@@ -558,14 +558,14 @@ Add security context on pod level
 apiVersion: v1
 kind: Pod
 metadata:
-	name: web-pod
+  name: web-pod
 spec:
-	securityContext:
-		runAsUser: 1000
-	containsers:
-		- name: ubuntu
-		  image: ubuntu
-		  command: ["sleep", "3600"]
+  securityContext:
+    runAsUser: 1000
+  containsers:
+    - name: ubuntu
+      image: ubuntu
+      command: ["sleep", "3600"]
 ```
 
 Add security context on container level
@@ -573,15 +573,15 @@ Add security context on container level
 apiVersion: v1
 kind: Pod
 metadata:
-	name: web-pod
+  name: web-pod
 spec:
-	containsers:
-		- name: ubuntu
-		  image: ubuntu
-		  command: ["sleep", "3600"]
-		  securityContext:
-			capabilities:
-				add: ["MAC_ADMIN"]
+  containsers:
+    - name: ubuntu
+      image: ubuntu
+      command: ["sleep", "3600"]
+      securityContext:
+      capabilities:
+        add: ["MAC_ADMIN"]
 ```
 
 Resource Requirements
@@ -594,19 +594,19 @@ By default (if not specified), the limits are 1 vCpu and 512 Mi.
 apiVersion: v1
 kind: Pod
 metadata:
-	name: web-pod
+  name: web-pod
 spec:
-	containsers:
-	- name: ubuntu
-	  image: ubuntu
-	  command: ["sleep", "3600"]
-	  resources:
-	  	requests:
-	  		memory: "1Gi"
-	  		cpu: 1
-	  	limits:
-	  		memory: "2Gi"
-	  		cpu: 2
+  containsers:
+  - name: ubuntu
+    image: ubuntu
+    command: ["sleep", "3600"]
+    resources:
+      requests:
+        memory: "1Gi"
+        cpu: 1
+      limits:
+        memory: "2Gi"
+        cpu: 2
 ```
 
 If the pod needs more cpu than it limits, it will throttle. But if it needs more memory, the pod will be terminated.
@@ -631,13 +631,13 @@ Pod with SA example
 apiVersion: v1
 kind: Pod
 metadata:
-	name: web-pod
+  name: web-pod
 spec:
-	serviceAccountName: <name-sa>
-	containsers:
-	- name: ubuntu
-	  image: ubuntu
-	  command: ["sleep", "3600"]
+  serviceAccountName: <name-sa>
+  containsers:
+  - name: ubuntu
+    image: ubuntu
+    command: ["sleep", "3600"]
 ```
 
 Taints and Tolerations
@@ -661,13 +661,13 @@ kubectl taint nodes node1 app=blie:NoSchedule
 apiVersion: v1
 kind: Pod
 metadata:
-	name: myapp-pod
+  name: myapp-pod
 spec:
-	containers:
-	- name: nginx-container
-	  image: nginx
-	tolerations:
-	- key: "app"
+  containers:
+  - name: nginx-container
+    image: nginx
+  tolerations:
+  - key: "app"
       operator: "Equal"
       value: "blue"
       effect: "NoSchedule"
@@ -695,7 +695,7 @@ spec:
   - name: data-processor
     image: data-processor
   nodeSelector:
-	size: Large
+  size: Large
 ```
 
 Node Affinity
@@ -728,15 +728,15 @@ spec:
   - name: data-processor
     image: data-processor
   affinity:
-  	nodeAffinity:
-  	  requiredDuringSchedulingIgnoredDuringExecution:
-	    nodeSelectorTerms:
-	    - matchExpressions:
-	      - key: size
-	        operator: In
-	        values:
-	        - Large
-	        - Medium
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: size
+          operator: In
+          values:
+          - Large
+          - Medium
 ```
 
 Multi-Container PODs
@@ -804,10 +804,10 @@ spec:
     image: simple-webapp
     ports:
       - containerPort: 8080
-  	readinessProbe:
-  	  httpGet:
-  	  	path: /api/ready
-  	  	port: 8080
+    readinessProbe:
+      httpGet:
+        path: /api/ready
+        port: 8080
 ```
 
 Rest probe
@@ -959,7 +959,7 @@ metadata:
     app: App1
     function: Front-end
   annotations:
-  	buildVersion: 1.34
+    buildVersion: 1.34
 spec:
   template:
     metadata:
@@ -1016,7 +1016,7 @@ metadata:
     app: my-app
     type: front-end
   annotations:
-  	buildVersion: 1.34
+    buildVersion: 1.34
 spec:
   strategy:
     type: RollingUpdate
@@ -1064,9 +1064,9 @@ spec:
   template:
     spec:
       containers:
-      	- name: math-add
-      	  image: ubuntu
-      	  command: ['expr', '3', '+', '2']
+        - name: math-add
+          image: ubuntu
+          command: ['expr', '3', '+', '2']
       restartPolicy: Never
 ```
 
@@ -1129,8 +1129,8 @@ spec:
       template:
         spec:
           containers:
-          	- name: reporting-tool
-          	  image: reporting-tool
+            - name: reporting-tool
+              image: reporting-tool
           restartPolicy: Never
 ```
 
@@ -1179,8 +1179,8 @@ spec:
     port: 80
     nodePort: 30008 # Optional
   selector:
-	  app: myapp
-	  type: front-end
+    app: myapp
+    type: front-end
 ```
 
 Link services and pods with labels and selectors.
@@ -1189,14 +1189,14 @@ Link services and pods with labels and selectors.
 apiVersion: v1
 kind: Pod
 metadata:
-	name: myapp-pod
-	labels:
-		app: myapp
-		type: front-end
+  name: myapp-pod
+  labels:
+    app: myapp
+    type: front-end
 spec:
-	containers:
-	 - name: nginx-container
-	   image: nginx
+  containers:
+   - name: nginx-container
+     image: nginx
 ```
 
 Services – Cluster IP
@@ -1215,8 +1215,8 @@ spec:
   - targetPort: 80
     port: 80
   selector:
-  	app: myapp
-  	type: back-end
+    app: myapp
+    type: back-end
 ```
 
 Network Policies
@@ -1237,7 +1237,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-  	  role: db
+      role: db
   policyTypes:
   - Ingress
   ingress:
@@ -1260,9 +1260,9 @@ Example of selectors to allow
         name: api-pod
     namespaceSelector:
       matchLabels:
-      	name: prod
+        name: prod
   - ipBlock:
-  	  cidr: 192.168.5.10/32
+      cidr: 192.168.5.10/32
   ports:
   - protocol: TCP
     port: 3306
@@ -1277,7 +1277,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-  	  role: db
+      role: db
   policyTypes:
   - Ingress
   - Egress
@@ -1291,8 +1291,8 @@ spec:
       port: 3306
   egress:
   - to:
-  	- ipBlock:
-  		cidr: 192.168.5.10/32
+    - ipBlock:
+      cidr: 192.168.5.10/32
     ports:
     - protocol: TCP
       port: 80
@@ -1316,58 +1316,58 @@ spec:
     matchLabels:
       name: nginx-ingress
   template:
-  	metadata:
-  	  labels:
-  	  	name: nginx-ingress
+    metadata:
+      labels:
+        name: nginx-ingress
     spec:
       containers:
-      	- name: nginx-ingress-controller
-      	  image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.21.0
+        - name: nginx-ingress-controller
+          image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.21.0
       args:
-      	- /nginx-ingress-controller
-      	- --configmap=$(POD_NAMESPACE)/nginx-configuration
+        - /nginx-ingress-controller
+        - --configmap=$(POD_NAMESPACE)/nginx-configuration
       env:
-      	- name: POD_NAME
-      	  valueFrom:
-      	  	fieldRef:
-      	  		fieldPath: metadata.name
-      	- name: POD_NAMESPACE
-      	  valueFrom:
-      	  	fieldRef:
-      	  		fieldPath: metadata.namespace
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
       ports:
-      	- name: http
-      	  containerPort: 80
-      	- name: https
-      	  containerPort: 443
+        - name: http
+          containerPort: 80
+        - name: https
+          containerPort: 443
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-	name: nginx-configuration
+  name: nginx-configuration
 ---
 apiVersion: v1
 kind: Service
 metadata:
-	name: nginx-ingress
+  name: nginx-ingress
 spec:
-	type: NodePort
-	ports:
-	- port: 80
-	  targetPort: 80
-	  protocol: TCP
-	  name: http
-	- port: 443
-	  targetPort: 443
-	  protocol: TCP
-	  name: https
-	selector:
-		name: nginx-ingress
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: http
+  - port: 443
+    targetPort: 443
+    protocol: TCP
+    name: https
+  selector:
+    name: nginx-ingress
 ---
 apiVersion: v1
 kind: ServiceAcount
 metadata:
-	name: nginx-ingress-serviceaccount
+  name: nginx-ingress-serviceaccount
 ```
 
 Ingress resource are set of rules.
@@ -1379,8 +1379,8 @@ metadata:
   name: ingress-wear
 spec:
   backend:
-  	serviceName: wear-service
-  	servicePort: 80
+    serviceName: wear-service
+    servicePort: 80
 ```
 
 ```bash
@@ -1404,17 +1404,17 @@ kind: Ingress
 metadata:
   name: ingress-wear-watch
 spec:
-	rules:
-	- http:
-		paths:
-		- path: /wear
+  rules:
+  - http:
+    paths:
+    - path: /wear
       backend:
-      	serviceName: wear-service
-      	servicePort: 80
-		- path: /watch
+        serviceName: wear-service
+        servicePort: 80
+    - path: /watch
       backend:
-      	serviceName: watch-service
-      	servicePort: 80
+        serviceName: watch-service
+        servicePort: 80
 ```
 
 Example with domain names:
@@ -1424,19 +1424,19 @@ kind: Ingress
 metadata:
   name: ingress-wear-watch
 spec:
-	rules:
-	- host: wear.my-online-store.com
-	  http:
-		paths:
-		- path: /wear
+  rules:
+  - host: wear.my-online-store.com
+    http:
+    paths:
+    - path: /wear
       backend:
-      	serviceName: wear-service
-      	servicePort: 80
-		- host: watch.my-online-store.com
-		  path: /watch
+        serviceName: wear-service
+        servicePort: 80
+    - host: watch.my-online-store.com
+      path: /watch
       backend:
-      	serviceName: watch-service
-      	servicePort: 80
+        serviceName: watch-service
+        servicePort: 80
 ```
 
 Nginx's annotations are available [here](https://kubernetes.github.io/ingress-nginx/examples/)  
@@ -1518,8 +1518,8 @@ spec:
   volumes:
   - name: data-volume
     hostPath:
-    	path: /data
-    	type: Directory
+      path: /data
+      type: Directory
 ```
 
 Persistent Volumes
@@ -1538,11 +1538,11 @@ metadata:
   name: pv-vol1
 spec:
   accessModes:
-  	- ReadWriteOnce
+    - ReadWriteOnce
   capacity:
-  	storage: 1Gi
+    storage: 1Gi
   hostPath:
-  	path: /tmp/data
+    path: /tmp/data
 ```
 
 Volume hosted on GCE
@@ -1553,12 +1553,12 @@ metadata:
   name: pv-vol1
 spec:
   accessModes:
-  	- ReadWriteOnce
+    - ReadWriteOnce
   capacity:
-  	storage: 1Gi
+    storage: 1Gi
   gcePersistentDisk:
-  	pdName: pd-disk
-  	fsType: ext4
+    pdName: pd-disk
+    fsType: ext4
 ```
 
 ```bash
@@ -1593,10 +1593,10 @@ metadata:
   name: myclaim
 spec:
   accessModes:
-  	- ReadWriteOnce
+    - ReadWriteOnce
   resources:
-  	requests:
-  		storage: 500Mi
+    requests:
+      storage: 500Mi
 ```
 
 Integration of the PVC into a pod:
